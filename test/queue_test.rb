@@ -10,7 +10,6 @@ describe('Queue') do
   end
 
   it('dequeue(): removes the correct item from the queue and returns its value') do
-  #(should raise an exception if the queue is empty)
     queue = Queue.new
     queue.enqueue(22)
     queue.enqueue(39)

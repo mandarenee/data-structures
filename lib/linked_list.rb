@@ -1,15 +1,15 @@
-Node = Struct.new(:val, :nxt)
+LinkNode = Struct.new(:val, :nxt)
 
 class LinkedList
   attr_accessor :head
 
-  def initialize(node = Node.new)
+  def initialize(node = LinkNode.new)
     @head = node
     @list = ""
   end
 
   def insert(val)
-    @head = Node.new(val, @head)
+    @head = LinkNode.new(val, @head)
   end
 
   def search(value)
@@ -21,13 +21,11 @@ class LinkedList
   end
 
   def remove(value)
-    removed = nil
     current_node = @head
 
     if current_node.val == value
-      removed = current_node.val
       @head = current_node.nxt
-      return removed
+      return current_node.val
     end
 
     until current_node.nxt.nil? || current_node.nxt.val == value
@@ -35,13 +33,9 @@ class LinkedList
       return nil if current_node.nxt.nil?
     end
 
-    if current_node.nxt.nxt.nil?
-      current_node.nxt = nil
-    else
-      removed = current_node.nxt
-      current_node.nxt = current_node.nxt.nxt
-      removed
-    end
+    removed = current_node.nxt
+    current_node.nxt = current_node.nxt.nxt
+    removed
   end
 
   def to_s
@@ -52,9 +46,8 @@ class LinkedList
 
   def print_out(node)
     @list << node.val.to_s
-    unless node.nxt.nil?
-      @list << ', '
-      print_out(node.nxt)
-    end
+    return if node.nxt.nil?
+    @list << ', '
+    print_out(node.nxt)
   end
 end

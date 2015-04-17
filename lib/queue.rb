@@ -12,7 +12,7 @@ class Queue
   end
 
   def dequeue
-    raise "No queue object" if @head.nil?
+    fail "No queue object" if @head.nil?
     @size -= 1
     temp = @head.val
     @head = @head.nxt
